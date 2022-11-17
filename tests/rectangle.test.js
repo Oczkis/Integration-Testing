@@ -1,4 +1,4 @@
-const {getRectangleArea, getRectanglePerimeter } = require('../js/rectangle');
+const { getRectangleArea, getRectanglePerimeter, getRectangleInfo } = require('../js/rectangle');
 
 test('should output length plus width multiplied by 2', () => {
     const number = getRectanglePerimeter(5, 5);
@@ -11,11 +11,12 @@ test('should output length multiplied by width', () => {
 });
 
 test('should output all neccessary rectangle information', () => {
-    const area = getRectangleArea(5, 5);
 
-    const perimeter = getRectanglePerimeter(5, 5);
+    const consoleLogSpy = jest.spyOn(console, 'log')
+    const number = 5;
+    const string = (`The perimeter of a rectangle is ${getRectanglePerimeter(number, number)} and the area is ${getRectangleArea(number, number)}`);
 
-    const string = `The perimeter of a rectangle is ${perimeter} and the area is ${area}`
+    getRectangleInfo(number, number);
 
-    expect(string).toBe(`The perimeter of a rectangle is ${perimeter} and the area is ${area}`);
+    expect(consoleLogSpy).toBeCalledWith(string);
 });
